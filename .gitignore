@@ -21,3 +21,6 @@ __pycache__/
 
 # Jupyter
 .ipynb_checkpoints/
+
+# initial configuration files
+__init__.py

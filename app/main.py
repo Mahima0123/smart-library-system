@@ -73,6 +73,5 @@ def main():
         else:
             print("Invalid option!")
 
-
 if __name__ == "__main__":
     main()

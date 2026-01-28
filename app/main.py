@@ -6,6 +6,7 @@ from services.transaction_service import TransactionService
 from models.user import User
 from services.analytics_service import AnalyticsService
 from services.recommendation_service import RecommendationService
+from services.visual_analytics_service import VisualAnalyticsService
 
 def menu():
     print("\n=== Smart Library System ===")
@@ -17,7 +18,8 @@ def menu():
     print("6. Return book")
     print("7. View analytics dashboard")
     print("8. Get book recommendations")
-    print("9. Exit")
+    print("9. View analytics charts")
+    print("10. Exit")
 
 
 def main():
@@ -106,6 +108,17 @@ def main():
                     print(f"{bid} | {title}")
 
         elif choice == "9":
+            print("1. Top borrowed books chart")
+            print("2. Monthly trend chart")
+
+            sub = input("Choose: ")
+
+            if sub == "1":
+                VisualAnalyticsService.top_books_chart()
+            elif sub == "2":
+                VisualAnalyticsService.monthly_trend_chart()
+
+        elif choice == "10":
             print("Goodbye!")
             break
         else:

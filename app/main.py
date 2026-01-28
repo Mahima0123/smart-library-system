@@ -4,7 +4,7 @@ from models.book import Book
 from services.user_service import UserService
 from services.transaction_service import TransactionService
 from models.user import User
-
+from services.analytics_service import AnalyticsService
 
 def menu():
     print("\n=== Smart Library System ===")
@@ -14,7 +14,8 @@ def menu():
     print("4. List users")
     print("5. Issue book")
     print("6. Return book")
-    print("7. Exit")
+    print("7. View analytics dashboard")
+    print("8. Exit")
 
 
 def main():
@@ -68,6 +69,29 @@ def main():
             TransactionService.return_book(book_id)
             print("Book returned successfully!")
         elif choice == "7":
+            print("\n--- Analytics Dashboard ---")
+
+            print("\nMost Borrowed Books:")
+            for title, count in AnalyticsService.most_borrowed_books():
+                print(f"{title} -> {count} times")
+
+            print("\nTop Users:")
+            for name, count in AnalyticsService.top_users():
+                print(f"{name} -> {count} books")
+
+            print("\nInactive Books:")
+            inactive = AnalyticsService.inactive_books()
+            if inactive:
+                for bid, title in inactive:
+                    print(f"{bid} | {title}")
+            else:
+                print("None")
+
+            print("\nMonthly Borrowing Trends:")
+            for month, total in AnalyticsService.monthly_trends():
+                print(f"{month} -> {total}")
+
+        elif choice == "8":
             print("Goodbye!")
             break
         else:

@@ -5,6 +5,7 @@ from services.user_service import UserService
 from services.transaction_service import TransactionService
 from models.user import User
 from services.analytics_service import AnalyticsService
+from services.recommendation_service import RecommendationService
 
 def menu():
     print("\n=== Smart Library System ===")
@@ -15,7 +16,8 @@ def menu():
     print("5. Issue book")
     print("6. Return book")
     print("7. View analytics dashboard")
-    print("8. Exit")
+    print("8. Get book recommendations")
+    print("9. Exit")
 
 
 def main():
@@ -92,6 +94,18 @@ def main():
                 print(f"{month} -> {total}")
 
         elif choice == "8":
+            book_id = int(input("Enter book ID: "))
+
+            recs = RecommendationService.recommend_books(book_id)
+
+            if not recs:
+                print("No recommendations available yet.")
+            else:
+                print("\nRecommended Books:")
+                for bid, title in recs:
+                    print(f"{bid} | {title}")
+
+        elif choice == "9":
             print("Goodbye!")
             break
         else:
